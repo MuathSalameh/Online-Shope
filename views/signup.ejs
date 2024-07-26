@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.cdnfonts.com/css/vazirmatn" rel="stylesheet"> 
+    <link rel="stylesheet" href="../style/signup.css" />
+    <title>Sign UP</title>
+</head>
+<body>
+<header style="height: 0;" id="header">
+        <div class="header-div" id="header-div">
+                <div class="logo-container"> 
+                    <svg id="logo" class="logo header-item" version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 1024" xml:space="preserve">
+                        <use href="#Duvay-logo"></use>
+                    </svg>
+                </div>
+        </div>
+</header>
+<form action="" method="post" name="signUp_Form">
+    <div class="h4-form-div"> 
+        <h4>Creat Your Account :</h4>
+    </div>
+<div class="center-content"> 
+    <div class="flex-containers">
+        <div class="inner_flex">
+            <p>Email*</p>
+            <input class="inputs" type="email" name="email" autocomplete="off" id="email-input" maxlength="100"/>
+            <p class="error-paragraph">Please enter a valid email</p>
+        </div>
+        <div class="inner_flex">
+            <p>Country*</p>
+             <select name="country" id="country" class="inputs">
+                <option value="" selected>Select a Country...</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+                <option value="CANADA">CANADA</option>
+                <option value="INDIA">INDIA</option>
+                <option value="JORDAN">JORDAN</option>
+             </select>
+            <p class="error-paragraph">Please select a country</p>
+        </div>
+    </div>
+    <div class="flex-containers">
+        <div class="inner_flex">
+            <p>First Name*</p>
+            <input class="inputs" type="text" name="fname" id="fname-input" maxlength="50"/>
+            <p class="error-paragraph">Please enter a valid first name</p>
+        </div>
+        <div class="inner_flex">
+            <p>Last name*</p>
+            <input class="inputs" type="text" name="lname" id="lname-input" maxlength="50" />
+            <p class="error-paragraph">Please enter a valid last name</p>
+        </div>
+    </div>
+    <div class="flex-containers" style="height: 110px;">
+        <div class="inner_flex">
+            <p>Passward*</p>
+            <input class="inputs" type="password" name="pass" id="pass-input"/>
+            <p class="error-paragraph">Please enter a valid password</p>
+        </div>
+        <div class="rules-container inner_flex">
+            <ul>
+                <li>1Rule number one asd asda as</li>
+                <li>2Rule number one asdasdasd </li>
+                <li>3Rule number one asdasasdaaaaaaa</li>
+                <li>4Rule number one asd</li>
+            </ul>
+        </div>
+    </div>
+    <div class="flex-containers">
+        <div class="inner_flex">
+            <input type="submit" value="Sign Up"/>
+            <span> Already have an account? </span> 
+            <a href="/signin"><p class="login-href">login Here</p></a>      
+        </div>
+    </div>
+</div>
+</form>
+<script>
+    let divRules = document.querySelector(".rules-container");
+    let emailInput=document.querySelector("#email-input");
+    let countryInput=document.querySelector("#country");
+    let fnameInput=document.querySelector("#fname-input");
+    let lnameInput=document.querySelector("#lname-input");
+    let passwordInput=document.querySelector("#pass-input");
+    let ErrorParagraphs=document.querySelectorAll(".error-paragraph");
+    var heigthAmount =0;
+    var counter=-1;
+    const regexem = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;    //regular expression For Email
+    document.querySelector('body').addEventListener("click" ,function (event) {
+        // console.log(passwordInput.value.length)
+       if (event.target==(passwordInput)) {
+        heigthAmount =0;
+        divRules.style.setProperty("--height",heigthAmount);
+       }
+       else{
+        heigthAmount =135;
+         divRules.style.setProperty("--height",heigthAmount);
+       }
+    });
+    document.querySelector('body').addEventListener("click" ,function (event) {
+        var emailRegexResult=emailInput.value.match(regexem);
+            if (event.target==(emailInput) ) {
+                    ErrorParagraphs[0].classList.remove("show-error-paragraph");
+                    emailInput.classList.remove("error-border-red");
+                    switch(true){
+                    case counter==1 && countryInput.value.length<=0   :
+                    ErrorParagraphs[1].classList.add("show-error-paragraph");
+                    countryInput.classList.add("error-border-red");
+                    break;
+                    case counter==2 && fnameInput.value.length<=2 :
+                    ErrorParagraphs[2].classList.add("show-error-paragraph");
+                    fnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==3 && lnameInput.value.length<=2:
+                    ErrorParagraphs[3].classList.add("show-error-paragraph");
+                    lnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==4 && passwordInput.value.length<=0:
+                    ErrorParagraphs[4].classList.add("show-error-paragraph");
+                    passwordInput.classList.add("error-border-red");
+                    break;
+                }
+                    counter=0;
+                }
+            else if(event.target==(countryInput)){
+                    ErrorParagraphs[1].classList.remove("show-error-paragraph");
+                    countryInput.classList.remove("error-border-red");
+                switch(true){
+                    case counter==0  && !emailRegexResult:
+                    ErrorParagraphs[0].classList.add("show-error-paragraph");
+                    emailInput.classList.add("error-border-red");
+                    break;
+                    case counter==2 && fnameInput.value.length<=2:
+                    ErrorParagraphs[2].classList.add("show-error-paragraph");
+                    fnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==3 && lnameInput.value.length<=2:
+                    ErrorParagraphs[3].classList.add("show-error-paragraph");
+                    lnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==4 && passwordInput.value.length<=0:
+                    ErrorParagraphs[4].classList.add("show-error-paragraph");
+                    passwordInput.classList.add("error-border-red");
+                    break;
+                }
+                counter=1;
+            }
+            else if(event.target==(fnameInput)){
+                ErrorParagraphs[2].classList.remove("show-error-paragraph");
+                fnameInput.classList.remove("error-border-red");
+                switch(true){
+                    case counter==0  && !emailRegexResult:
+                    ErrorParagraphs[0].classList.add("show-error-paragraph");
+                    emailInput.classList.add("error-border-red");
+                    break;
+                    case counter==1 && countryInput.value.length<=0:
+                    ErrorParagraphs[1].classList.add("show-error-paragraph");
+                    countryInput.classList.add("error-border-red");
+                    break;
+                    case counter==3 && lnameInput.value.length<=2:
+                    ErrorParagraphs[3].classList.add("show-error-paragraph");
+                    lnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==4 && passwordInput.value.length<=0:
+                    ErrorParagraphs[4].classList.add("show-error-paragraph");
+                    passwordInput.classList.add("error-border-red");
+                    break;
+                }
+                counter=2;
+                }
+            else if(event.target==(lnameInput)){
+                 ErrorParagraphs[3].classList.remove("show-error-paragraph");
+                 lnameInput.classList.remove("error-border-red");
+                 switch(true){
+                    case counter==0 && !emailRegexResult:
+                    ErrorParagraphs[0].classList.add("show-error-paragraph");
+                    emailInput.classList.add("error-border-red");
+                    break;
+                    case counter==1 && countryInput.value.length<=0 :
+                    ErrorParagraphs[1].classList.add("show-error-paragraph");
+                    countryInput.classList.add("error-border-red");
+                    break;
+                    case counter==2 && fnameInput.value.length<=2:
+                    ErrorParagraphs[2].classList.add("show-error-paragraph");
+                    fnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==4 && passwordInput.value.length<=0:
+                    ErrorParagraphs[4].classList.add("show-error-paragraph");
+                    passwordInput.classList.add("error-border-red");
+                    break;
+                }
+                 counter=3;
+            }       
+            else if(event.target==(passwordInput)){
+                ErrorParagraphs[4].classList.remove("show-error-paragraph");
+                passwordInput.classList.remove("error-border-red");
+                switch(true){
+                    case counter==0  && !emailRegexResult:
+                    ErrorParagraphs[0].classList.add("show-error-paragraph");
+                    emailInput.classList.add("error-border-red");
+                    break;
+                    case counter==1 && countryInput.value.length<=0:
+                    ErrorParagraphs[1].classList.add("show-error-paragraph");
+                    countryInput.classList.add("error-border-red");
+                    break;
+                    case counter==2 && fnameInput.value.length<=2:
+                    ErrorParagraphs[2].classList.add("show-error-paragraph");
+                    fnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==3 && lnameInput.value.length<=2:
+                    ErrorParagraphs[3].classList.add("show-error-paragraph");
+                    lnameInput.classList.add("error-border-red");
+                    break;
+                }
+                counter=4;
+                }
+            else{
+                console
+                switch(true){
+                    case counter==0  && !emailRegexResult :
+                    ErrorParagraphs[0].classList.add("show-error-paragraph");
+                    emailInput.classList.add("error-border-red");
+                    break;
+                    case counter==1 && countryInput.value.length<=0:
+                    ErrorParagraphs[1].classList.add("show-error-paragraph");
+                    countryInput.classList.add("error-border-red");
+                    break;
+                    case counter==2 && fnameInput.value.length<=2:
+                    ErrorParagraphs[2].classList.add("show-error-paragraph");
+                    fnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==3 && lnameInput.value.length<=2:
+                    ErrorParagraphs[3].classList.add("show-error-paragraph");
+                    lnameInput.classList.add("error-border-red");
+                    break;
+                    case counter==4 && passwordInput.value.length<=0:
+                    ErrorParagraphs[4].classList.add("show-error-paragraph");
+                    passwordInput.classList.add("error-border-red");
+                    break;
+                }
+            }
+    });
+ </script>
+<svg style="display:none; height:0">
+    <symbol id="Duvay-logo">
+    <path class="logo-main-color"   stroke="none" 
+        d="
+    M131.337250,532.301636 
+        C118.689285,545.806885 102.884544,552.098816 85.269608,553.061951 
+        C68.655785,553.970337 51.955593,553.303589 35.293392,553.306641 
+        C34.673355,553.306763 34.053268,553.063904 31.624308,552.556335 
+        C41.041721,548.880798 39.798992,541.800781 39.806194,535.223572 
+        C39.835945,508.063538 39.767967,480.903229 39.872410,453.743561 
+        C39.893997,448.131104 39.362644,443.003784 33.730293,440.237213 
+        C34.550907,438.063049 36.113407,438.690216 37.279217,438.688110 
+        C52.775307,438.660278 68.297340,438.148865 83.760841,438.871765 
+        C101.165382,439.685364 117.047066,445.050232 129.693069,457.916901 
+        C148.400558,476.950836 151.140060,509.381042 131.337250,532.301636 
+    M52.390186,446.122986 
+        C51.438545,447.951996 51.241341,449.939484 51.241196,451.947205 
+        C51.239075,481.416016 51.202656,510.884979 51.291847,540.353516 
+        C51.312847,547.292236 54.582546,550.587585 61.378502,550.602905 
+        C69.688835,550.621643 77.982780,550.787781 86.308823,549.906616 
+        C112.452774,547.139893 132.502792,526.239807 133.623627,500.116058 
+        C134.849640,471.541412 117.716858,448.413940 91.476730,443.267761 
+        C80.589890,441.132660 69.582237,442.207672 58.619633,442.156677 
+        C56.112968,442.145020 54.157993,443.327698 52.390186,446.122986 
+    z"/>
+    <path class="logo-main-color" stroke="none" 
+        d="
+    M325.948700,537.938843 
+        C334.720123,529.074524 336.662018,518.163818 336.325623,506.776550 
+        C335.813812,489.451538 336.360992,472.147125 336.619690,454.835938 
+        C336.712769,448.607117 336.030212,442.836395 328.741455,438.545776 
+        C335.341248,437.648987 340.465210,437.963104 346.197418,438.619293 
+        C338.030273,443.998993 339.848358,451.876801 339.813873,459.396515 
+        C339.730621,477.542542 340.351501,495.690857 339.380188,513.836365 
+        C338.184631,536.171082 322.809448,552.428101 300.003052,555.139221 
+        C276.790253,557.898743 255.919128,544.240417 250.375320,522.593018 
+        C249.300812,518.397278 248.813538,514.108154 248.821564,509.750916 
+        C248.856201,490.930786 248.727432,472.109741 248.880371,453.290833 
+        C248.926147,447.658813 248.141159,442.674896 242.808182,439.062408 
+        C250.699646,437.558472 258.392548,437.924286 267.932037,438.445648 
+        C259.102631,444.535309 260.356781,452.428314 260.343048,459.946320 
+        C260.313568,476.101654 260.098907,492.261627 260.405701,508.411224 
+        C260.702057,524.012451 266.056549,537.096619 280.792908,544.696838 
+        C295.600403,552.333740 312.349548,549.863831 325.948700,537.938843 
+    z"/>
+    <path class="logo-main-color" stroke="none" 
+        d="
+    M695.321960,466.405029 
+        C699.705017,456.517029 703.926514,446.971436 708.118958,437.491577 
+        C710.930237,438.104645 710.995850,440.239014 711.698364,441.805603 
+        C726.207153,474.158691 740.712524,506.513428 755.125671,538.909180 
+        C757.594177,544.457642 760.359375,549.613037 766.886414,551.805542 
+        C766.624878,552.168762 766.363403,552.531921 766.101929,552.895142 
+        C758.440186,552.895142 750.778442,552.895142 741.664734,552.895142 
+        C748.928345,547.420898 744.703552,542.398804 742.564819,537.341003 
+        C740.814270,533.201355 738.706482,529.195801 737.212830,524.969666 
+        C735.867188,521.162170 733.529968,520.101868 729.660645,520.143677 
+        C713.172668,520.322205 696.680847,520.313538 680.192627,520.148315 
+        C676.477234,520.111084 674.432190,521.320923 673.096680,524.834106 
+        C671.028748,530.274109 668.561951,535.570129 666.097656,540.849365 
+        C664.119019,545.088318 662.538635,549.114441 669.749756,552.559509 
+        C662.797363,553.802063 657.661377,553.133118 652.638306,553.240295 
+        C652.094299,551.420532 653.321899,551.177124 654.115906,550.824890 
+        C658.199768,549.013306 660.582275,545.678467 662.294434,541.776428 
+        C673.265442,516.773682 684.208313,491.758514 695.321960,466.405029 
+    M711.917114,469.476105 
+        C709.718628,464.710052 707.520142,459.944031 704.766724,453.974915 
+        C695.236877,475.327789 686.226135,495.517609 677.172485,515.803589 
+        C682.875854,517.477966 728.619751,517.225037 732.661438,515.495667 
+        C725.856018,500.378632 719.052429,485.265869 711.917114,469.476105 
+    z"/>
+    <path stroke="none" 
+        d="
+    M888.120789,444.413300 
+        C887.956055,446.680206 888.423584,448.406464 889.459412,450.000183 
+        C900.619507,467.172058 911.770203,484.350006 922.929932,501.522125 
+        C923.377625,502.210968 923.827026,502.939575 925.533997,502.966888 
+        C930.611206,495.938507 935.935364,488.549866 941.279175,481.175507 
+        C948.704224,470.929260 956.172913,460.714386 963.565063,450.444489 
+        C967.106506,445.524414 966.762268,443.354767 961.380798,438.962769 
+        C967.974976,438.962769 973.848511,438.962769 980.457458,438.962769 
+        C966.339233,446.397217 960.965271,460.580719 951.982300,471.614197 
+        C943.794800,481.670471 936.643616,492.566528 928.911682,503.000580 
+        C926.927429,505.678253 925.990234,508.416595 926.046387,511.761047 
+        C926.191772,520.418884 926.157410,529.081543 926.063599,537.740845 
+        C926.001953,543.436218 926.275330,548.898376 932.028931,552.750854 
+        C924.113037,552.750854 916.197205,552.750854 906.977051,552.750854 
+        C916.337708,546.815918 913.837280,538.043884 914.795166,530.001282 
+        C916.640381,514.508423 911.905945,501.709167 902.419067,489.523132 
+        C892.723877,477.069397 884.492859,463.476196 875.613159,450.387054 
+        C872.684753,446.070526 869.316223,442.205536 864.519958,439.203613 
+        C873.571899,439.203613 882.623840,439.203613 891.936951,439.203613 
+        C891.314270,441.332336 888.264587,441.626648 888.120789,444.413300 
+    z"/>
+    <path stroke="none" 
+        d="
+    M508.281128,537.198120 
+        C505.310608,542.915833 503.836975,548.969543 500.436249,553.929688 
+        C498.078430,553.453186 497.855743,551.793518 497.281738,550.497314 
+        C483.457245,519.278687 469.637787,488.057800 455.865540,456.816071 
+        C452.923218,450.141510 450.563477,443.098938 443.354706,439.070007 
+        C450.833160,439.070007 458.311584,439.070007 466.596619,439.070007 
+        C461.851166,443.080963 463.137207,447.098053 465.119080,451.452820 
+        C477.399200,478.436127 489.543060,505.481476 501.745056,532.500427 
+        C502.285675,533.697449 502.951965,534.837708 503.535217,535.957397 
+        C505.533173,535.879639 505.639984,534.297791 506.140686,533.177795 
+        C518.581055,505.352539 530.941956,477.491608 543.472961,449.707367 
+        C545.230469,445.810577 545.101318,442.698669 540.904053,439.293671 
+        C546.513062,438.124939 551.216797,438.726288 556.242310,439.321350 
+        C548.041138,443.419556 546.066345,451.465576 542.886047,458.658020 
+        C531.367676,484.707001 519.901733,510.779175 508.281128,537.198120 
+    z"/>
+    </symbol>
+</svg>
+</body>
+</html>
